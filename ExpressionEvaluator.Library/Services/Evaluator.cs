@@ -19,6 +19,10 @@ public class Evaluator
             string token = tokens[i];
             if (int.TryParse(token, out int value))
             {
+                if (operatorStack.Count == 0)
+                {
+                    throw new ArgumentException($"Invalid expression");
+                }
                 valueStack.Push(value);
             }
             else
@@ -38,11 +42,19 @@ public class Evaluator
 
         while (operatorStack.Count > 0)
         {
-            IOperator op = operatorStack.Pop();
-            int b = valueStack.Pop();
-            int a = valueStack.Pop();
-            int result = op.Compute(a, b);
-            valueStack.Push(result);
+            if (valueStack.Count > 1)
+            {
+                IOperator op = operatorStack.Pop();
+                int b = valueStack.Pop();
+                int a = valueStack.Pop();
+                int result = op.Compute(a, b);
+                valueStack.Push(result);
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid expression");
+            }
+            
         }
 
         return valueStack.Pop();

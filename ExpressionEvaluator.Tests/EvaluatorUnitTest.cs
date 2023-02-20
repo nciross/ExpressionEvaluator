@@ -30,17 +30,17 @@ namespace ExpressionEvaluator.Tests
             Assert.Equal(expectedResult, result);
         }
 
-       
 
-        //[Fact]
-        //public void Evaluate_InvalidExpression_ThrowsException()
-        //{
-        //    // Arrange
-        //    string invalidExpression = "5 *";
 
-        //    // Act and assert
-        //    Assert.Throws<ArgumentException>(() => _evaluator.Evaluate(invalidExpression));
-        //}
+        [Fact]
+        public void Evaluate_InvalidExpression_ThrowsException()
+        {
+            // Arrange
+            string invalidExpression = "5 5 +";
+
+            // Act and assert
+            Assert.Throws<ArgumentException>(() => _evaluator.Evaluate(invalidExpression));
+        }
 
         [Fact]
         public void Evaluate_InvalidOperator_ThrowsException()
