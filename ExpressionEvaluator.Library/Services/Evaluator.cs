@@ -19,7 +19,7 @@ public class Evaluator
             string token = tokens[i];
             if (int.TryParse(token, out int value))
             {
-                if (operatorStack.Count == 0 && operatorStack.Count > 0)
+                if (operatorStack.Count == 0 && valueStack.Count > 0)
                 {
                     throw new ArgumentException($"Invalid expression");
                 }
